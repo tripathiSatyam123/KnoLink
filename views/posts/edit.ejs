@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+<h1 style="text-align:center">Edit your post </h1>
+
+<form class="form" action="/editpost" method="POST">
+    
+    <div class="form-group">
+        <textarea class="form-control" name = "question" rows="2" cols="50" required="required"><%=post.question%></textarea>
+    </div>
+    <input class="hidden" type="text" name="postid" value="<%=post._id%>">
+    <div class="form-group">
+    <button class="btn btn-lg btn-default form-control"> Submit </button>
+    </div>
+    </div>
+</form>
+</div>
+
+<% include ../partials/footer %>

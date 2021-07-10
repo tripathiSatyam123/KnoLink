@@ -1,0 +1,43 @@
+<%include ../partials/header%>
+
+<div class="container">
+    <div class="row" >
+        <div class="col-md-4">
+            <h1>
+                <%=user.firstname+' '+user.lastname %>
+            </h1>
+            <h2>
+               Alias Name : <%=user.alias%>
+            </h2>
+            <h3>
+               email ID <%=user.username%> <br>
+               Refer And Earn :  <%=user.referralCode%><br>
+               Rewaard Points : <%=user.points%>
+            </h3>
+        </div>
+        <div class="col-md-8">
+            <h2>Queries Raised :</h2><hr>
+            <% posts.forEach(function(post){ %>
+            <% if(post.author.id==user.id)  {        %>
+              <li> <a href="/posts/<%=post._id%>" style="color:black">
+                     <%=post.question%>
+                </a> 
+                </li>
+            <% } %>
+            <% }); %>
+        </div>
+        <div class="col-md-8">
+            <h2>Queries answered :</h2><hr>
+            <% posts.forEach(function(post){ %>
+            
+             <%   post.answers.forEach(function(answer){ %>
+             <%   if(answer.author.id==user.id)  {       %>
+                      <h3><%= post.question%></h3> 
+                        <h6> <%=answer.text%></h6>
+             <% }                                        %>
+             <%   });                                    %>
+                
+            <% });                                       %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<%include ../partials/header%>
+
+<style>
+.fa {
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+function updateLikes() {
+    id = $('.likeicon').attr('userId');
+    $.post('/index/' + id, function (response) {
+        $('fa-thumbs-o-up').text(response.likeCount); //your counter on a page
+        //and update likes counter with response
+    })
+}
+</script>
+
+
+<div class="container img-responsive" >
+    <div class="row">
+        <div class="col-md-9" style="background:white">
+             
+            <h1><%= post.question %></h1>
+             <% if(currentUser && post.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+            <%include ../partials/editpost%>
+            <%include ../partials/deletepost%>
+            <br>
+            <%}%>
+            <%=post.answers.length%> Answers 
+            
+            <hr>
+           
+              <%post.answers.forEach(function(answer){%>
+              
+                <div class="row">
+                    <div class="col-md-12">
+                         <div class="well">
+                <%=answer.text%><br>
+                    
+                    <i onclick="updateLikes()" class="fa fa-thumbs-up">. 2</i>
+                    <span class="pull-right"><strong><%=answer.author.username%></strong></span><br>
+                </div>
+                </div>
+               
+                </div>
+              <%  });%>
+              
+        </div>
+        <div class="col-md-3">
+           
+            <%include ../partials/commentmodal%>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

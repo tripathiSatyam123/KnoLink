@@ -1,0 +1,107 @@
+<% include ../partials/header %>
+
+
+ <style>
+    .pagination {
+         display: inline-block;
+    }
+
+    .pagination a {
+          color: black;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+          transition: background-color .3s;
+          border: 1px solid #ddd;
+          margin: 0 4px;
+    }
+
+    .pagination a.active {
+         background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+    }
+
+    .pagination a:hover:not(.active) {background-color: #4CAF50;}
+    
+    }
+</style>
+
+
+
+<div class="container">
+    
+        <% if(currentUser && currentUser.isAdmin){ %>
+            <h1> You are an admin </h1>
+        <% } %>
+    
+    <div class="row">
+        
+        <div class="col-md-2">
+            </div>
+         
+        
+        <div class="col-md-8">
+      <% posts.forEach(function(post){ %>
+            
+                    <a href="/posts/<%=post._id%>" style="color:black">
+                    <h4>
+                         <strong> <%="  "+post.question %></strong>
+                    </h4>
+                    </a>
+                    
+                
+                <div>
+                         <h5> by <a href="/users/<%=post.author.id%>"  style="color:black">
+                        <%= post.author.alias %>
+                        </a> on
+                     <em><%=post.posted_at.toUTCString()%></em> </h5>
+                      
+                </div>
+                 
+                
+                <hr>
+           
+            
+        <% }); %>
+        
+        <div class="pagination">
+            <% var i,j;%>
+            
+            <% if(pagecount>5){%>
+                <a  href="/posts/page/<%=pagecount-5%>">&laquo; Prev 5</a>
+            <% } %>
+            
+            <% if(pagecount>5){%>
+                <a href="/posts/page/<%=pagecount-1%>">&laquo;</a>
+             <% } %>
+             
+             <%for (i=pagecount-2,j=1; j<=5; i++) { %>
+             
+             
+               <% if(i>0) { %>
+               
+                    <%if(i==pagecount){ %>
+                        <a class= "active" href="/posts/page/<%=i%>"><%=i%></a>
+                    <%} else{ %>
+                    <a href="/posts/page/<%=i%>"><%=i%></a>
+                    <%}%>
+                    <%j++%>
+                <% } %>
+                
+              <% } %>
+              
+              <a href="/posts/page/<%=pagecount+1%>">&raquo;</a>
+              <a href="/posts/page/<%=pagecount+5%>">Skip 5 &raquo;</a>
+              
+            </div>
+  
+       </div>
+        <div class="col-md-2 text-center">
+            <%include ../partials/postmodal%>
+        </div>
+    </div>
+</div>
+
+
+<%include ../partials/footer %>

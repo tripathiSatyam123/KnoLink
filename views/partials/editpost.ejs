@@ -1,0 +1,61 @@
+
+<button type="button" class="btn btn-warning btn-xs text-center" data-toggle="modal" data-target="#myModal">Edit</button>
+
+<!-- Modal -->
+ <% if(currentUser){ %>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit the query here.</h4>
+      </div>
+      <div class="modal-body">
+            
+            
+          <form action="/editpost" method="POST">
+    <div class="form-group">
+        <textarea class="form-control" name = "question" rows="2" cols="50" required="required"><%=post.question%></textarea>
+    </div>    
+    <input class="hidden" type="text" name="postid" value="<%=post._id%>">
+    <button class="btn btn-xs btn-primary"> Submit </button>
+
+    
+</form>
+       </div>     
+            
+      
+       <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+
+  </div>
+<%}%>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+           <div class="alert alert-warning">You need to login first</div>
+        </h4>
+      </div>
+      <div class="modal-body">
+           
+            <a href="/login" class="btn btn-md btn-success">Go to Login Page</a>
+            
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

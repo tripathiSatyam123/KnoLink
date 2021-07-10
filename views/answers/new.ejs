@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+<h1 style="text-align:center">Add new Query</h1>
+
+<form action="/posts/<%=post._id%>/answers" method="POST">
+    <div class="form-group">
+    <input class="form-control" type="text" placeholder="Your Answer" name="answer[text]">
+    </div>
+    <div class="form-group">
+     <input class="form-control" type="text" placeholder="Author name" name="answer[author]">
+     </div>
+     <div class="form-group">
+    <button class="btn btn-lg btn-default"> Submit </button>
+    </div>
+</form>
+
+</div>
+
+<% include ../partials/footer %>
